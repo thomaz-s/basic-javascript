@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text">
+    <button onclick="buscar()">Adicionar</button>
+    <div></div>
+    <script>
+        var body = document.querySelector('body');
+        var container = document.querySelector('div');
+
+        var promiseBuscar = function(){
+            return new Promise(function(resolve, reject){
+                var xhr = new XMLHttpRequest();
+                var user = document.querySelector('input').value;
+                document.querySelector('input').value = "";
+                xhr.open("GET", "https://api.github.com/users/"+user+"/repos");
+                xhr.send(null);
+
+                xhr.onreadystatechange = function(){
+                    if(xhr.readyState === 4){
+                        if (xhr.status === 200){
+                            resolve(JSON.parse(xhr.responseText));
+                        }else if (xhr.status === 404){
+                            reject("usuário não existe");
+                        }else{
+                            reject("outro erro");
+                        }
+                    }
+                }
+            });
+        }
+
+        function buscar(){
+            container.innerHTML = "";
+            var carregando = document.createElement('p');
+            var textoCarregando = document.createTextNode('Carregando...');
+            carregando.appendChild(textoCarregando);
+            container.appendChild(carregando);
+            promiseBuscar()
+                .then(function(response){
+                    container.innerHTML = "";
+                    var lista = document.createElement('ul');
+                    body.appendChild(container);
+                    container.appendChild(lista);
+                    for (var obj of response){
+                        var item = document.createElement('li');
+                        var texto = document.createTextNode(obj.name);
+                        item.appendChild(texto);
+                        lista.appendChild(item);
+                    }
+                })
+                .catch(function(error){
+                    container.innerHTML = "";
+                    alert(error);
+            });
+        }
+    </script>
+</body>
+</html>
