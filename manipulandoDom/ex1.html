@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <button>Adicionar Quadrado</button>
+    </div>
+
+    <script>
+        var botao = document.querySelector('body div#app button');
+        var divApp = document.querySelector('div#app');
+        botao.onclick = function(){
+            var quadrado = document.createElement('div');
+            quadrado.style.width = "100px";
+            quadrado.style.height = "100px";
+            quadrado.style.margin = "5px";
+            quadrado.style.backgroundColor = "#ff0000";
+            divApp.appendChild(quadrado);
+        }
+    </script>
+</body>
+</html>

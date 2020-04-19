@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <input type="text" id="textField">
+    <button onclick="adicionar(document.querySelector('#textField'))">Adicionar</button>
+    
+    <div id="container" style="padding:5px"></div>
+    
+    <script>
+        var nomes = ["Diego", "Gabriel", "Lucas"];
+        var container = document.querySelector('#container');
+        var lista = document.createElement('ul');
+        container.appendChild(lista);
+        for (nome of nomes){
+            var item = document.createElement('li');
+            var texto = document.createTextNode(nome);
+            item.appendChild(texto);
+            lista.appendChild(item);
+        }
+
+        function adicionar(textField){
+            var item = document.createElement('li');
+            var texto = document.createTextNode(textField.value);
+            item.appendChild(texto);
+            lista.appendChild(item);
+            textField.value = "";
+        }
+    </script>
+</body>
+</html>

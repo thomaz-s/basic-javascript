@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>Adicionar Quadrado</button>
+    <div id="app" style="display: grid; margin-top: 5px;">
+        
+    </div>
+
+    <script>
+        var botao = document.querySelector('body button');
+        var divApp = document.querySelector('div#app');
+
+        var colunas = 2;
+        var colunasCss = "";
+        while (screen.width - 100*colunas > 100){
+            colunas+=1;
+            colunasCss = colunasCss + "1fr ";
+        }
+        colunasCss = colunasCss + "1fr";
+
+        divApp.style.gridTemplateColumns = colunasCss;
+
+        botao.onclick = function(){
+            var quadrado = document.createElement('div');
+            quadrado.style.width = "100px";
+            quadrado.style.height = "100px";
+            quadrado.style.marginBottom = "5px"
+            quadrado.style.backgroundColor = "#ff0000";
+            quadrado.onmouseenter = function mudarCor(){
+                var newColor = getRandomColor(); // #E943F0
+                quadrado.style.backgroundColor = newColor;
+            };
+            divApp.appendChild(quadrado);
+        }
+
+        function getRandomColor() {
+            var letters = "0123456789ABCDEF";
+            var color = "#";
+            for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+        
+    </script>
+</body>
+</html>

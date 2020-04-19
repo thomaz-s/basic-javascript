@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var nomes = ["Diego", "Gabriel", "Lucas"];
+        var container = document.querySelector('body');
+        var lista = document.createElement('ul');
+        container.appendChild(lista);
+        for (nome of nomes){
+            var item = document.createElement('li');
+            var texto = document.createTextNode(nome);
+            item.appendChild(texto);
+            lista.appendChild(item);
+        }
+    </script>
+</body>
+</html>
